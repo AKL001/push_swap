@@ -2,14 +2,14 @@
 
 // typedef struct s_push_swap
 // {
-//     int num;
+//     int value;
 //     struct s_push_swap  *prev;
 //     struct s_push_swap  *next;
-// } t_push_swap;
+// } t_stack;
 
-void ft_push_to_a(t_push_swap **a, t_push_swap **b)
+void ft_push_to_a(t_stack **a, t_stack **b)
 {
-    t_push_swap *tmp;
+    t_stack *tmp;
 
     if (*b == NULL) // If b is empty, do nothing
         return;

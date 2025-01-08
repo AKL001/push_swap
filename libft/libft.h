@@ -9,11 +9,11 @@
 
 // typedef struct s_push_swap
 // {
-//     int num;
+//     int value;
 //     struct s_push_swap  *prev;
 //     struct s_push_swap  *next;
-// } t_push_swap;
+// } t_stack;
 
-// t_push_swap	*ft_lstnew(int num);
+// t_stack	*ft_lstnew(int nbr);
 
 // #endif

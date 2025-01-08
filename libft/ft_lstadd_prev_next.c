@@ -12,9 +12,9 @@
 
 #include "../push_swap.h"
 
-void	ft_lstadd_prev_next(t_push_swap **lst, t_push_swap *new)
+void	ft_lstadd_prev_next(t_stack **lst, t_stack *new)
 {
-	t_push_swap	*last;
+	t_stack	*last;
 
 	if (!lst)
 		return ;

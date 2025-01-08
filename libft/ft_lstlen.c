@@ -12,7 +12,7 @@
 
 #include "../push_swap.h"
 
-int	ft_lstlen(t_push_swap *lst)
+int	ft_lstlen(t_stack *lst)
 {
 	int	size;
 
