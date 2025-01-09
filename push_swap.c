@@ -3,7 +3,7 @@
 int main(int argc, char *argv[])
 {
     t_stack *a = NULL; // Initialize a to NULL
-    // t_stack *b = NULL; // Initialize b to NULL
+    t_stack *b = NULL; // Initialize b to NULL
     
     // first stack a
     // t_stack *a1 = ft_lstnew(1);
@@ -35,15 +35,41 @@ int main(int argc, char *argv[])
     
     /* testing parssing */
     stack_init(&a, argv + 1);
-    printf("stack a\n");
+    // ft_push_to_b(&a,&b);
+    // ft_push_to_b(&a,&b);
+    // ft_push_to_b(&a,&b);
+    // printf("-------stack B--------\n");
+    // while(b)
+    // {
+    //     printf("%d\n",b->value);
+    //     b = b->next;
+    // }  
+    r_rotate_a(&a);
+    printf("-------stack A--------\n");
     while(a)
-    {
+    {                           
         printf("%d\n",a->value);
         a = a->next;
-    }  
+    }
 
-    // free_cur_stack(&a);
+    // printf("-------stack AFTER A--------\n");
+    // rotate_a(&a);
+    // while(a)
+    // {                           
+    //     printf("%d\n",a->value);
+    //     a = a->next;
+    // }
+    // printf("-------stack AFTER B--------\n");
+    // // rotate_b(&b);
+    // while(b)
+    // {
+    //     printf("%d\n",b->value);
+    //     b = b->next;
+    // }  
+    free_stack(&a);
+    // free_stack(&b);
 
+    return 0;
     // free_split(argv);
     /* problem leaks */
     // char *nbr =  "-24";

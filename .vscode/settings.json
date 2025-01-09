@@ -4,6 +4,7 @@
         "unistd.h": "c",
         "libft.h": "c",
         "stdio.h": "c",
-        "stddef.h": "c"
+        "stddef.h": "c",
+        "stdlib.h": "c"
     }
 }

@@ -11,15 +11,33 @@ void ft_push_to_a(t_stack **a, t_stack **b)
 {
     t_stack *tmp;
 
-    if (*b == NULL) // If b is empty, do nothing
+    if (*b == NULL)
         return;
-    tmp = (*b);
+    tmp = (*b);                                             
     *b = (*b)->next;
-    if (*b)  // If b is not empty after the move, set the previous pointer of the new top of b to NULL
+    if (*b)  
         (*b)->prev = NULL;
-    tmp->next = *a;  // Set the next of the node from b to the current top of a
-    if (*a)          // If a is not empty, set the previous pointer of the current top of a to the new element
+    tmp->next = *a; 
+    if (*a)         
         (*a)->prev = tmp;
-    *a = tmp;  // Set a to point to the new top element, which was taken from b
-    tmp->prev = NULL;  // The previous pointer of the new top element of a is NULL
+    *a = tmp;           
+    tmp->prev = NULL;
+    write(1, "pa\n",3);
+}
+void ft_push_to_b(t_stack **a, t_stack **b)
+{
+    t_stack *tmp;
+
+    if (*a == NULL)
+        return;
+    tmp = (*a);
+    *a = (*a)->next;
+    if (*a)  
+        (*a)->prev = NULL;
+    tmp->next = *b; 
+    if (*b)         
+        (*b)->prev = tmp;
+    *b = tmp;
+    tmp->prev = NULL;  
+    write(1, "pb\n",3);
 }
