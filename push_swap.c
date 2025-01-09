@@ -1,24 +1,9 @@
 #include "push_swap.h"
 
-void    free_split(char **split_result)
-{
-    int i;
-    
-    i = 0;
-    if (!split_result)
-        return;
-    while (split_result[i])
-    {
-        free(split_result[i]);
-        i++;
-    }
-    free(split_result);
-}
-
 int main(int argc, char *argv[])
 {
     t_stack *a = NULL; // Initialize a to NULL
-    t_stack *b = NULL; // Initialize b to NULL
+    // t_stack *b = NULL; // Initialize b to NULL
     
     // first stack a
     // t_stack *a1 = ft_lstnew(1);
@@ -56,7 +41,9 @@ int main(int argc, char *argv[])
         printf("%d\n",a->value);
         a = a->next;
     }  
-    free_stack(&a);
+
+    // free_cur_stack(&a);
+
     // free_split(argv);
     /* problem leaks */
     // char *nbr =  "-24";

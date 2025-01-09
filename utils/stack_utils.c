@@ -9,16 +9,16 @@ t_stack     *find_last_node(t_stack *head)
     return (head);
 }
 
-void    append_node(t_stack **stack,int nbr)
+int append_node(t_stack **stack,int nbr)
 {
     t_stack *last_node;
     t_stack *node;
 
     if (stack == NULL)
-        return;
+        return (1);
     node = malloc(sizeof(t_stack));
     if (!node)
-        return;
+        return (1);
     node->next = NULL;
     node->value = nbr;
     // append first node have no prev 
@@ -33,6 +33,7 @@ void    append_node(t_stack **stack,int nbr)
         last_node->next = node;
         node->prev = last_node;
     }
+    return (0);
 }
 
 int     stack_len(t_stack *stack)

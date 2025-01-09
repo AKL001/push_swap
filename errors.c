@@ -1,6 +1,18 @@
 #include "push_swap.h"
 
 
+// void free_cur_stack(t_stack **a)
+// {
+//     t_stack *temp;
+
+//     while (*a)
+//     {
+//         temp = *a;
+//         *a = (*a)->next;  // Move to the next node
+//         free(temp);  // Free the current node
+//     }
+// }
+
 void free_stack(t_stack **stack)
 {
 	t_stack	*tmp;
@@ -55,14 +67,18 @@ void ft_error(t_stack **stack,char **av)
 	write(2, "Error\n",6);
 	exit(1);
 }
+
 void free_av(char **av)
 {
 	int i;
 
-	i = 0;
-	if (av == NULL)
-		return;
-	while (av[i++])
-		free(av[i]);
-	free(av);
+    if (!av)
+        return;
+    i = 0;
+    while (av[i])
+    {
+        free(av[i]);
+        i++;
+    }
+    free(av);
 }

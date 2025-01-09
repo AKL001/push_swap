@@ -25,6 +25,7 @@ int	error_syntax(char *str_nbr);
 void ft_error(t_stack **stack,char **av);
 void free_stack(t_stack **stack);
 void free_av(char **av);
+void free_cur_stack(t_stack **a);
 
 
 /* LIBFT */
@@ -41,7 +42,7 @@ void ft_push_to_a(t_stack **a, t_stack **b);
 
 /* stack  utils */
 int     stack_len(t_stack *stack);
-void    append_node(t_stack **stack,int nbr);
+int    append_node(t_stack **stack,int nbr);
 t_stack     *find_last_node(t_stack *head);
 
 

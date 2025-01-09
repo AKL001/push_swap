@@ -15,173 +15,179 @@
 #include <stdlib.h>
 #include <stddef.h>
 
-static size_t	_ft_c_ws(char const *str, char c)
+static int	count_words(char const *s, char c)
 {
+	size_t	counter;
 	size_t	i;
-	size_t	w;
+	int		flag;
 
-	w = 0;
+	flag = 1;
 	i = 0;
-	while (str[i])
+	counter = 0;
+	while (s[i])
 	{
-		while (str[i] && str[i] == c)
-			i++;
-		if (str[i])
-			w++;
-		while (str[i] && str[i] != c)
-			i++;
-	}
-	return (w);
-}
-
-static void	*_ft_free_words(char **strs, size_t i)
-{
-	while (i--)
-		free(strs[i]);
-	free(strs);
-	return (NULL);
-}
-
-static void	_ft_skip(int not, char const *s, size_t *i, char c)
-{
-	if (not)
-		while (*(s + *i) && *(s + *i) != c)
-			(*i)++;
-	else
-		while (*(s + *i) && *(s + *i) == c)
-			(*i)++;
-	return ;
-}
-
-static char	**_get_splited(char const *s, char c, char **strings)
-{
-	char	*word;
-	char	*start;
-	size_t	i;
-	size_t	w_i;
-
-	i = 0;
-	w_i = 0;
-	while (*(s + i))
-	{
-		_ft_skip(0, s, &i, c);
-		if (*(s + i))
+		if (s[i] != c && flag)
 		{
-			start = (char *)(s + i);
-			_ft_skip(1, s, &i, c);
-			word = ft_substr(s, start - s, (s + i) - start);
+			counter++;
+			flag = 0;
+		}
+		else if (s[i] == c)
+			flag = 1;
+		i++;
+	}
+	return (counter);
+}
+
+static int	free_allocate(char **ptr, int pos)
+{
+	while (pos--)
+	{
+		free(ptr[pos]);
+	}
+	free(ptr);
+	return (1);
+}
+
+static int	allocate_words(char **ptr, char *s, char c)
+{
+	unsigned int	i;
+	size_t			len;
+	char			*word;
+
+	i = 0;
+	while (*s)
+	{
+		len = 0;
+		while (*s == c && *s)
+			s++;
+		while (*s != c && *s)
+		{
+			len++;
+			s++;
+		}
+		if (len > 0)
+		{
+			word = ft_substr(s - len, 0, len);
 			if (!word)
-				return (_ft_free_words(strings, w_i));
-			strings[w_i++] = word;
+				return (free_allocate(ptr, i));
+			ptr[i++] = word;
 		}
 	}
-	strings[w_i] = 0;
-	return (strings);
+	ptr[i] = NULL;
+	return (0);
 }
 
 char	**ft_split(char const *s, char c)
 {
-	char	**strings;
+	size_t	words;
+	char	**ptr;
 
 	if (!s)
 		return (NULL);
-	strings = (char **)malloc(sizeof(char *) * (_ft_c_ws(s, c) + 1));
-	if (!strings)
+	words = count_words(s, c);
+	ptr = (char **)malloc(sizeof(char *) * (words + 1));
+	if (!ptr)
 		return (NULL);
-	return (_get_splited(s, c, strings));
+	ptr[words] = NULL;
+	if (allocate_words(ptr, (char *)s, c))
+		return (NULL);
+	return (ptr);
 }
-// static int	count_words(char const *s, char c)
-// {
-// 	size_t	counter;
-// 	size_t	i;
-// 	int		flag;
 
-// 	flag = 1;
-// 	i = 0;
-// 	counter = 0;
-// 	while (s[i])
-// 	{
-// 		if (s[i] != c && flag)
-// 		{
-// 			counter++;
-// 			flag = 0;
-// 		}
-// 		else if (s[i] == c)
-// 			flag = 1;
-// 		i++;
-// 	}
-// 	return (counter);
+// static size_t count_words(char const *s, char c)
+// {
+//     size_t count;
+//     int in_word;
+
+//     count = 0;
+//     in_word = 0;
+//     if (!s)
+//         return (0);
+//     while (*s)
+//     {
+//         if (*s != c && !in_word)
+//         {
+//             in_word = 1;
+//             count++;
+//         }
+//         else if (*s == c)
+//             in_word = 0;
+//         s++;
+//     }
+//     return (count);
 // }
 
-// static int	free_allocate(char **ptr, int pos)
+// static char *get_next_word(char const *str, char c, size_t *len, size_t *offset)
 // {
-// 	while (pos--)
-// 	{
-// 		free(ptr[pos]);
-// 	}	
-// 	free(ptr);
-// 	return (1);
+//     char const *start;
+//     char *word;
+
+//     *len = 0;
+//     while (str[*offset] == c && str[*offset])
+//         (*offset)++;
+//     start = str + *offset;
+//     while (str[*offset] != c && str[*offset])
+//     {
+//         (*len)++;
+//         (*offset)++;
+//     }
+//     word = ft_substr(start, 0, *len);
+//     return (word);
 // }
 
-// static int	get_next_word(char **ptr, char *s, char c, int i)
+// static int free_allocate(char **ptr, int i)
 // {
-// 	int	len;
-// 	int	j;
-
-// 	len = 0;
-// 	while (s[len] != c && s[len])
-// 		len++;
-// 	if (len == 0)
-// 		return (0);
-// 	ptr[i] = (char *)malloc(sizeof(char) * (len + 1));
-// 	if (!ptr[i])
-// 		return (-1);
-// 	j = 0;
-// 	while (j < len)
-// 	{
-// 		ptr[i][j] = s[j];
-// 		j++;
-// 	}
-// 	ptr[i][j] = '\0';
-// 	return (len);
+//     if (!ptr)
+//         return (-1);
+//     while (i >= 0)
+//     {
+//         if (ptr[i])
+//             free(ptr[i]);
+//         i--;
+//     }
+//     free(ptr);
+//     return (-1);
 // }
 
-// static int	allocate_words(char **ptr, char *s, char c)
+// static int allocate_words(char **ptr, char const *s, char c)
 // {
-// 	unsigned int	i;
-// 	int			result;
+//     unsigned int i;
+//     size_t len;
+//     size_t offset;
+//     char *word;
 
-// 	i = 0;
-// 	while (*s)
-// 	{
-// 		while (*s == c && *s)
-// 			s++;
-// 		result = get_next_word(ptr, s, c, i);
-// 		if (result == -1)
-// 			return (free_allocate(ptr, i));
-// 		if (result > 0)
-// 		{
-// 			i++;
-// 			s += result;
-// 		}
-// 	}
-// 	ptr[i] = NULL;
-// 	return (0);
+//     i = 0;
+//     offset = 0;
+//     while (s[offset])
+//     {
+//         word = get_next_word(s, c, &len, &offset);
+//         if (!word && i > 0)
+//             return (free_allocate(ptr, i - 1));
+//         if (!word)
+//             return (free_allocate(ptr, -1));
+//         if (len > 0)
+//             ptr[i++] = word;
+//         else
+//             free(word);
+//     }
+//     ptr[i] = NULL;
+//     return (0);
 // }
 
-// char	**ft_split(char const *s, char c)
+// char **ft_split(char const *s, char c)
 // {
-// 	size_t	words;
-// 	char	**ptr;
+//     char **result;
+//     size_t word_count;
 
-// 	if (!s)
-// 		return (NULL);
-// 	words = count_words(s, c);
-// 	ptr = (char **)malloc(sizeof(char *) * (words + 1));
-// 	if (!ptr)
-// 		return (NULL);
-// 	// ptr[words] = NULL;
-// 	if (allocate_words(ptr, (char *)s, c))
-// 		return (NULL);
-// 	return (ptr);
+//     if (!s)
+//         return (NULL);
+//     word_count = count_words(s, c);
+//     if (word_count == 0)
+//         return (NULL);
+//     result = (char **)malloc(sizeof(char *) * (word_count + 1));
+//     if (!result)
+//         return (NULL);
+//     if (allocate_words(result, s, c) == -1)
+//         return (NULL);
+//     return (result);
 // }
