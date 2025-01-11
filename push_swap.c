@@ -1,5 +1,16 @@
 #include "push_swap.h"
 
+/* determinating what and who should go first or be executed 
+    1- {arraylen}/2 
+    // comparint the possition of the number with half of the array
+    // 
+    2- number possition if >= (arraylen)/2 
+    // meaning if the  possition of 10-> 2 and 2 >= 50 meaning not gonna execute it
+    3- check  if the number  is bigger or smaller than the numbers in stack b;
+    
+
+*/
+
 int main(int argc, char *argv[])
 {
     t_stack *a = NULL; // Initialize a to NULL

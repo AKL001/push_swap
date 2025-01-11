@@ -10,6 +10,8 @@
 typedef struct s_push_swap
 {
     int value;
+    // consider addin the possition of the number;
+    // int poss;
     struct s_push_swap  *prev;
     struct s_push_swap  *next;
 } t_stack;
