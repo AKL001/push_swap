@@ -10,11 +10,44 @@
     
 
 */
+t_stack *find_highest(t_stack *a)
+{
+    t_stack *max;
+
+    if (!a)  // Check if the list is empty
+        return NULL;
+
+    max = a;  // Initialize max to the first node
+
+    while (a != NULL)  // Iterate through the list
+    {
+        if (a->value > max->value)  // If the current node has a higher value
+            max = a;  // Update max to the current node
+        a = a->next;  // Move to the next node
+    }
+
+    return max;  // Return the node with the highest value
+}
+
+
+
+void tiny_sort(t_stack **a)
+{
+    t_stack *big_node;
+
+    big_node = find_highest(*a);
+    if (*a == big_node)
+        rotate_a(a);
+    else if ((*a)->next == big_node)
+        r_rotate_a(a);
+    if ((*a)->value > (*a)->next->value)
+        swap_a(a);
+}
 
 int main(int argc, char *argv[])
 {
     t_stack *a = NULL; // Initialize a to NULL
-    t_stack *b = NULL; // Initialize b to NULL
+    // t_stack *b = NULL; // Initialize b to NULL
     
     // first stack a
     // t_stack *a1 = ft_lstnew(1);
@@ -43,7 +76,7 @@ int main(int argc, char *argv[])
     //     printf("=========================\n");
     // }
     // argv = ft_split(argv[1], ' ');
-    
+    // char *av[] = {"13","37", "-42",NULL};
     /* testing parssing */
     stack_init(&a, argv + 1);
     // ft_push_to_b(&a,&b);
@@ -55,13 +88,16 @@ int main(int argc, char *argv[])
     //     printf("%d\n",b->value);
     //     b = b->next;
     // }  
-    r_rotate_a(&a);
-    printf("-------stack A--------\n");
+    // r_rotate_a(&a);
+    tiny_sort(&a);
+    printf("-------stack A after--------\n");
     while(a)
     {                           
         printf("%d\n",a->value);
         a = a->next;
     }
+
+    free_stack(&a);
 
     // printf("-------stack AFTER A--------\n");
     // rotate_a(&a);
@@ -77,7 +113,6 @@ int main(int argc, char *argv[])
     //     printf("%d\n",b->value);
     //     b = b->next;
     // }  
-    free_stack(&a);
     // free_stack(&b);
 
     return 0;

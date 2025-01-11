@@ -35,9 +35,9 @@ void r_rotate_b(t_stack **b)
     write(1, "rrb\n",4);
 }
 
-void r_rotate_a_b(t_stack **a,t_stack **b)
+void rr_rotate(t_stack **a,t_stack **b)
 {
     r_rotate_a(a);
-    r_rotate_a(b);
+    r_rotate_b(b);
     write(1, "rrr\n",4);
 }

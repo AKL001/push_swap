@@ -49,8 +49,12 @@ void rotate_b(t_stack **b);
 // Reverse ROTATE
 void r_rotate_a(t_stack **a);
 void r_rotate_b(t_stack **b);
-void r_rotate_a_b(t_stack **a);
+void rr_rotate(t_stack **a,t_stack **b);
 
+// SWAP 
+void swap_a(t_stack **a);
+void swap_b(t_stack **b);
+void swap_a_b(t_stack **a,t_stack **b);
 
 
 

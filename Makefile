@@ -1,7 +1,7 @@
 NAME= push_swap
 
 SRCS = push_swap.c stack_init.c errors.c utils/stack_utils.c libft/ft_split.c libft/ft_substr.c \
-		utils/push.c utils/rotate.c utils/re_rotate.c
+		utils/push.c utils/rotate.c utils/re_rotate.c utils/swap.c
 
 DEPS = push_swap.h
 
@@ -12,7 +12,7 @@ all : $(NAME)
 	@make clean
 
 $(NAME): $(OBJS)
-	@ cc -Wall -Wextra -Werror $(OBJS) -o $(NAME)
+	@ cc -Wall -Wextra -Werror $(OBJS) -o $(NAME) -fsanitize=address
 
 clean: 
 	@rm -f $(OBJS) 
