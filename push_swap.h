@@ -56,6 +56,9 @@ void swap_a(t_stack **a);
 void swap_b(t_stack **b);
 void swap_a_b(t_stack **a,t_stack **b);
 
+/* sorted array */
+int    *sort_list(t_stack *a);
+
 
 
 /* stack  utils */
