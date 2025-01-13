@@ -46,11 +46,80 @@ void tiny_sort(t_stack **a)
 
 int main(int argc, char *argv[])
 {
-    t_stack *a = NULL; // Initialize a to NULL
-
-    /* testing parssing */
+    t_stack *a = NULL;
+    t_stack *b = NULL;
+    
+    if (argc < 2)
+        return 1;
+        
+    // Initialize stack A
     stack_init(&a, argv + 1);
+    
+    // Check if already sorted
+    if (!is_sorted(a))
+    {
+        // Sort based on size
+        if (stack_len(a) == 3)
+            tiny_sort(&a);
+        else
+            sort_stack(&a, &b);
+    }
+    // printf("-------STACK A SORTED--------\n");
+    // while(a){
+    //     printf("%d\n",a->value);
+    //     a = a->next;
+    // }
+    // Cleanup
+    free_stack(&a);
+    free_stack(&b);
+    return 0;
+    //     t_stack *a = NULL; // Initialize a to NULL
+    // t_stack *b = NULL;
+    // t_stack *original_a = NULL; // To preserve the original list of 'a'
+    // t_stack *tmp;
+    // /* Testing parsing */
+    // stack_init(&a, argv + 1);
+    // original_a = a;  // Preserve the original 'a' list
     // int *array = sort_list(a);
+    // int len = stack_len(a);
+    // int min_num = array[len / 2];
+    // tmp = a;
+    // int a_len = stack_len(a);
+    // int cnt;
+    // while(a_len > 3)
+    // {
+    //     cnt = 0;
+    //     while(tmp)
+    //     {   
+    //         if (a->value < min_num)
+    //             ft_push_to_b(&a,&b);
+    //         if (tmp->value < min_num && cnt < a_len / 2 )
+    //             rotate_a(&a);
+    //         if (tmp->value < min_num && cnt > a_len / 2)
+    //             r_rotate_a(&a);
+    //         cnt++;
+    //         tmp = tmp->next;
+    //     }
+    //     a_len = stack_len(a);
+    // }
+    
+    // printf("------- Stack B list less than min --------\n");
+    // while(b) {
+    //     printf("%d\n", b->value);
+    //     b = b->next;
+    // }
+    // printf("------- Stack A list less than min --------\n");
+
+    // while(a) {
+    //     printf("%d\n", a->value);
+    //     a = a->next;
+    // }
+
+    // while(a)
+    // {
+    //     printf("%d\n",a->value);
+    //     a = a->next;
+    // }
     // tiny_sort(&a);
     // printf("-------stack A with list --------\n");
     // while(a)

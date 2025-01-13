@@ -11,11 +11,30 @@ typedef struct s_push_swap
 {
     int value;
     // consider addin the possition of the number;
-    // int poss;
+    // int poss; 
     struct s_push_swap  *prev;
     struct s_push_swap  *next;
 } t_stack;
 
+typedef struct s_bounds {
+    int min;
+    int max;
+    int size;
+    int *sorted_array;
+} t_bounds;
+
+// Structure to hold chunk information
+typedef struct s_chunk {
+    int start;
+    int end;
+} t_chunk;
+
+// Structure to hold position costs
+typedef struct s_cost {
+    int index;      // Position in stack
+    int moves;      // Number of moves needed
+    int is_ra;      // 1 for ra, 0 for rra
+} t_cost;
 
 /* STACK INIT */
 void    stack_init(t_stack **a,char **argv);
@@ -59,6 +78,15 @@ void swap_a_b(t_stack **a,t_stack **b);
 /* sorted array */
 int    *sort_list(t_stack *a);
 
+/* additionals or tools */
+void sort_stack(t_stack **a, t_stack **b);
+int find_closest_chunk_number(t_stack *stack, int chunk_min, int chunk_max); 
+void execute_rotation(t_stack **stack, int moves, char stack_name);
+int calculate_moves(t_stack *stack, int pos);
+int find_position(t_stack *stack, int value);
+void tiny_sort(t_stack **a);
+int *sort_array_copy(t_stack *stack, int size);
+int is_sorted(t_stack *stack);
 
 
 /* stack  utils */
