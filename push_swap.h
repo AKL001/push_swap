@@ -36,6 +36,12 @@ typedef struct s_cost {
     int is_ra;      // 1 for ra, 0 for rra
 } t_cost;
 
+
+typedef struct s_max {
+    int value;      // Position in stack
+    int moves;      // Number of moves needed
+} t_max_cost;
+
 /* STACK INIT */
 void    stack_init(t_stack **a,char **argv);
 
@@ -80,13 +86,14 @@ int    *sort_list(t_stack *a);
 
 /* additionals or tools */
 void sort_stack(t_stack **a, t_stack **b);
-int find_closest_chunk_number(t_stack *stack, int chunk_min, int chunk_max); 
-void execute_rotation(t_stack **stack, int moves, char stack_name);
+// int find_closest_chunk_number(t_stack *stack, int chunk_min, int chunk_max); 
+// void execute_rotation(t_stack **stack, int moves, char stack_name);
 int calculate_moves(t_stack *stack, int pos);
 int find_position(t_stack *stack, int value);
 void tiny_sort(t_stack **a);
 int *sort_array_copy(t_stack *stack, int size);
 int is_sorted(t_stack *stack);
+// void sort_stack(t_stack **a, t_stack **b);
 
 
 /* stack  utils */

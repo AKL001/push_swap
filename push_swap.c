@@ -64,10 +64,15 @@ int main(int argc, char *argv[])
         else
             sort_stack(&a, &b);
     }
-    // printf("-------STACK A SORTED--------\n");
-    // while(a){
-    //     printf("%d\n",a->value);
-    //     a = a->next;
+    printf("-------STACK A LEFT--------\n");
+    while(a){
+        printf("%d\n",a->value);
+        a = a->next;
+    }
+    // printf("-------STACK B SORTED--------\n");
+    // while(b){
+    //     printf("%d\n",b->value);
+    //     b = b->next;
     // }
     // Cleanup
     free_stack(&a);

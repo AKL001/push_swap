@@ -2,7 +2,7 @@ NAME= push_swap
 
 SRCS = push_swap.c stack_init.c errors.c utils/stack_utils.c libft/ft_split.c libft/ft_substr.c \
 		utils/push.c utils/rotate.c utils/re_rotate.c utils/swap.c \
-		sort_list.c tools/tools1.c tools/is_sorted.c 
+		sort_list.c tools/sort_stack.c tools/is_sorted.c 
 
 DEPS = push_swap.h
 
