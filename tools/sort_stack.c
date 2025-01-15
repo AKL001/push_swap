@@ -258,29 +258,22 @@ int	is_reverse(t_stack **a)
 {
 	t_stack	*tmp;
 	int		len;
-	int		i;
+	int		j;
 
-	i = 0;
+	j = 0;
 	tmp = *a;
 	len = stack_len(*a);
-	while ((tmp)->value > (tmp)->next->value)
+	while ((tmp)->next)
 	{
-			i++;
+		if ((tmp)->value > (tmp)->next->value)
+			j++;
 		tmp = (tmp)->next;
 	}
-	i++;
-	if (i == len)
-    {
-        printf("its rra\n");
+    j++;
+	if (j == len)
         return 1;
-    }
-		// r_rotate_a(a);
 	else
-    {
-        printf("its ra \n");
         return 0;
-    }
-		// rotate_a(a);
 }
 
 void sort_stack(t_stack **a, t_stack **b)
@@ -314,7 +307,7 @@ void sort_stack(t_stack **a, t_stack **b)
         currect_chunk.start = sorted[i];
         currect_chunk.end = sorted[MIN((i + 1) + (chunk - 1), size - 1)];
         // printf("chunk  %d range [%d;%d]\n",i,currect_chunk.start,currect_chunk.end);
-        if ((*a) && is_in_chunk((*a)->value, currect_chunk) || (*a)->value < currect_chunk.start)
+        if ((*a) && is_in_chunk((*a)->value, currect_chunk))
         {
             if(stack_len(*b) >= 2)
                 if ((*b)->next && (*b)->value < (*b)->next->value)
@@ -323,10 +316,23 @@ void sort_stack(t_stack **a, t_stack **b)
             i++;
             // smart_push_to_b(a,b);
         }
-        if(is_reverse(a))
-            r_rotate_a(a);
+        else if ((*a)->value < currect_chunk.start)
+        {
+            ft_push_to_b(a,b);
+            rotate_b(b);
+            i++;            
+        }
+        // if(is_reverse(a))
+        //     r_rotate_a(a);
+        // else
+        //     rotate_a(a);
         else
-            rotate_a(a);
+        {
+            if(is_reverse(a))
+                r_rotate_a(a);
+            else
+                rotate_a(a);
+        }
         // else
         //     rotate_a(a);
             // check_revers(a);

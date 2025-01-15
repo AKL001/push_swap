@@ -13,7 +13,7 @@ all : $(NAME)
 	@make clean
 
 $(NAME): $(OBJS)
-	@ cc -Wall -Wextra -Werror $(OBJS) -o $(NAME) 
+	@ cc -Wall -Wextra -Werror -g $(OBJS) -o $(NAME) 
 # -fsanitize=address
 
 clean: 
