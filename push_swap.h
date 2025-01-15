@@ -43,6 +43,11 @@ typedef struct s_max {
     int poss;      // Number of moves needed
 } t_max_cost;
 
+typedef struct s_min {
+    int value;
+    int moves;      // Position in stack
+    int poss;      // Number of moves needed
+} t_min_cost;
 /* STACK INIT */
 void    stack_init(t_stack **a,char **argv);
 
