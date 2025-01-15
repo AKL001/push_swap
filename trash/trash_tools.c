@@ -170,7 +170,7 @@ void sort_stack(t_stack **a, t_stack **b)
         
         // Calculate chunk boundaries for current iteration
         int chunk_start = sorted[i * chunk_range];
-        int chunk_end = sorted[MIN((i + 1) * chunk_range - 1, size - 1)];
+        int chunk_end = sorted[MIN((i + 1) * chunk_range, size - 1)];
         
         // Process current chunk
         while (has_numbers_in_range(*a, chunk_start, chunk_end))

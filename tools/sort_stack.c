@@ -29,13 +29,13 @@ t_max_cost find_max(t_stack *stack,int size)
             {
                 max.value = stack->value;
                 max.moves = size - pos;
-                // return max;
+                max.poss = pos;
             }
             else
             {
                 max.value = stack->value;
-                max.moves = pos;
-                // return max;
+                max.moves  = pos;
+                max.poss = pos;
             }
         }
         pos++;
@@ -98,7 +98,7 @@ t_cost find_from_bottom(t_stack *a, t_chunk chunk,int size)
             cost.index = pos;
             cost.moves = size - pos;  // Calculate reverse rotations needed
             cost.is_ra = 0;
-            return cost;
+            // return cost;
         }
         pos++;
         tmp = tmp->next;
@@ -119,7 +119,7 @@ t_cost find_from_top(t_stack *a, t_chunk chunk,int size)
             cost.index = pos;
             cost.moves = pos;
             cost.is_ra = 1;
-            return cost;
+            // return cost;
         }
         pos++;
         tmp = tmp->next;
@@ -139,12 +139,8 @@ void push_back_to_a(t_stack **b,t_stack **a)
         if (!b_len)
             return;
         max = find_max(*b,b_len);
-        // while((*b)->value != max.value)
-        // {
-        //     if 
-        // }
         printf("the %d max => %d\n",i++,max.value);
-        if (max.moves != -1 && (max.moves <= b_len / 2))
+        if (max.moves != -1 && (max.poss <= b_len / 2))
         {
             while (max.moves-- > 0)
                 rotate_b(b);
@@ -177,46 +173,71 @@ void sort_stack(t_stack **a, t_stack **b)
         free(sorted);
         return;
     }
-    remaining = stack_len(*a) - 1;
+    remaining = stack_len(*a);
     chunk = chunk_range(size); 
     i = 0;
     while (remaining >= 0)
     {
-        currect_chunk.start = sorted[i * chunk];
-        currect_chunk.end = sorted[MIN((i + 1) * chunk, size -1)];
-        printf("chunk range [%d;%d]\n",currect_chunk.start,currect_chunk.end);
-        while(number_in_chunk(*a,currect_chunk) && remaining >= 0)
+        if (i > size - chunk)
+            i = size - chunk;  // Lock i to the start of the last chunk
+        currect_chunk.start = sorted[i];
+        currect_chunk.end = sorted[MIN((i + 1) + (chunk - 1), size - 1)];
+        printf("chunk  %d range [%d;%d]\n",i,currect_chunk.start,currect_chunk.end);
+        if (((*a) && is_in_chunk((*a)->value, currect_chunk)) || (*a)->value < currect_chunk.start)
         {
-            // if(remaining <= 3)
-            //     break;
-            printf("remainind => %d\n",remaining);
-            
-            // remaining--;
-            top = find_from_top(*a,currect_chunk,remaining);
-            bottom = find_from_bottom(*a,currect_chunk,remaining);
-
-            if (top.index == -1 && bottom.index == -1)
-                break;
-
-            if (top.index != -1 && (top.moves <= bottom.moves))
-            {
-                int moves = top.moves;
-                while (moves-- > 0)
-                    rotate_a(a);
-            }
-            else if (bottom.index != -1)
-            {
-                int moves = bottom.moves;
-                while (moves-- > 0)
-                    r_rotate_a(a);
-            }
-            if (*b && (*b)->next && ((*b)->value < (*b)->next->value))
-                swap_b(b);
+            if (*b && (*b)->next && (*b)->value < (*b)->next->value)
+                rotate_b(b);
             ft_push_to_b(a, b);
-            remaining--;
         }
+        else
+            rotate_a(a);
         i++;
+        remaining--;
     }
+    printf("------ BACK TO A ------\n");
+    push_back_to_a(b,a);
+    // printf("======== STACK B ==========\n");
+    // while(*b)
+    // {
+    //     printf("%d\n",(*b)->value);
+    //     (*b) = (*b)->next; 
+    // }
+    // while (remaining >= 0)
+    // {
+    //     currect_chunk.start = sorted[i * chunk];
+    //     currect_chunk.end = sorted[MIN((i + 1) * chunk, size -1)];
+    //     printf("chunk range [%d;%d]\n",currect_chunk.start,currect_chunk.end);
+    //     while(number_in_chunk(*a,currect_chunk) && remaining >= 0)
+    //     {
+    //         // if(remaining <= 3)
+    //         //     break;
+    //         printf("remainind => %d\n",remaining);
+            
+    //         // remaining--;
+    //         top = find_from_top(*a,currect_chunk,remaining);
+    //         bottom = find_from_bottom(*a,currect_chunk,remaining);
+
+    //         if (top.index == -1 && bottom.index == -1)
+    //             break;
+
+    //         // if (top.index != -1 && (top.moves <= bottom.moves))
+    //         // {
+    //         //     while (top.moves-- > 0)
+    //         //         rotate_a(a);
+    //         // }
+    //         // else if (bottom.index != -1)
+    //         // {
+    //         //     while (bottom.moves-- > 0)
+    //         //         r_rotate_a(a);
+    //         // }
+            
+    //         if (*b && (*b)->next && ((*b)->value < (*b)->next->value))
+    //             swap_b(b);
+    //         ft_push_to_b(a, b);
+    //         remaining--;
+    //     }
+    //     i++;
+    // }
     // if (remaining == 2)
     //     tiny_sort(a);
     // printf("----------STACK B----- \n");
@@ -225,8 +246,8 @@ void sort_stack(t_stack **a, t_stack **b)
     //     printf("%d\n",(*b)->value);
     //     (*b) = (*b)->next;
     // }
-    printf("------ NOW after tiny sort ------\n");
-    push_back_to_a(b,a);
+    // printf("------ NOW after tiny sort ------\n");
+    // push_back_to_a(b,a);
     // printf("ok ok \n");
     free(sorted);
 }

@@ -38,8 +38,9 @@ typedef struct s_cost {
 
 
 typedef struct s_max {
-    int value;      // Position in stack
-    int moves;      // Number of moves needed
+    int value;
+    int moves;      // Position in stack
+    int poss;      // Number of moves needed
 } t_max_cost;
 
 /* STACK INIT */
