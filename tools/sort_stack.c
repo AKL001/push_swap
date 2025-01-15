@@ -179,6 +179,28 @@ t_min_cost find_min(t_stack *stack, int size)
     }
     return min;
 }
+// void smart_push_to_b(t_stack **a,t_stack **b)
+// {
+//     if (!*a)
+//         return;
+//     if (!*b)
+//         ft_push_to_b(a,b);
+//     int num_to_push = (*a)->value;
+//     int b_len = stack_len(*b);
+//     t_min_cost is_min;
+
+//     is_min = find_min(*b,b_len);
+//     if((*b)->value != is_min.value)
+//     {
+//         if (is_min.poss <= b_len / 2)
+//             while(is_min.poss-- > 0)
+//                 rotate_b(b);
+//         else
+//             while(is_min.poss++ < b_len)
+//                 r_rotate_b(b);
+//     }
+//     ft_push_to_b(a,b);
+// }
 void smart_push_to_b(t_stack **a,t_stack **b)
 {
     if (!*a)
@@ -187,21 +209,20 @@ void smart_push_to_b(t_stack **a,t_stack **b)
         ft_push_to_b(a,b);
     int num_to_push = (*a)->value;
     int b_len = stack_len(*b);
-    t_min_cost is_min;
+    t_max_cost max;
 
-    is_min = find_min(*b,b_len);
-    if((*b)->value != is_min.value)
+    max = find_max(*b,b_len);
+    if((*b)->value != max.value)
     {
-        if (is_min.poss <= b_len / 2)
-            while(is_min.poss-- > 0)
+        if (max.poss <= b_len / 2)
+            while(max.poss-- > 0)
                 rotate_b(b);
         else
-            while(is_min.poss++ < b_len)
+            while(max.poss++ < b_len)
                 r_rotate_b(b);
     }
     ft_push_to_b(a,b);
 }
-
 
 void push_back_to_a(t_stack **b,t_stack **a)
 {
@@ -232,6 +253,36 @@ void push_back_to_a(t_stack **b,t_stack **a)
         ft_push_to_a(a, b);
     }
 }
+
+int	is_reverse(t_stack **a)
+{
+	t_stack	*tmp;
+	int		len;
+	int		i;
+
+	i = 0;
+	tmp = *a;
+	len = stack_len(*a);
+	while ((tmp)->value > (tmp)->next->value)
+	{
+			i++;
+		tmp = (tmp)->next;
+	}
+	i++;
+	if (i == len)
+    {
+        printf("its rra\n");
+        return 1;
+    }
+		// r_rotate_a(a);
+	else
+    {
+        printf("its ra \n");
+        return 0;
+    }
+		// rotate_a(a);
+}
+
 void sort_stack(t_stack **a, t_stack **b)
 {
     int size;
@@ -263,16 +314,24 @@ void sort_stack(t_stack **a, t_stack **b)
         currect_chunk.start = sorted[i];
         currect_chunk.end = sorted[MIN((i + 1) + (chunk - 1), size - 1)];
         // printf("chunk  %d range [%d;%d]\n",i,currect_chunk.start,currect_chunk.end);
-        if (((*a) && is_in_chunk((*a)->value, currect_chunk)) || (*a)->value < currect_chunk.start)
+        if ((*a) && is_in_chunk((*a)->value, currect_chunk) || (*a)->value < currect_chunk.start)
         {
-            // if (*b && (*b)->next && (*b)->value < (*b)->next->value)
-            //     swap_b(b);
-            // ft_push_to_b(a, b);
-            smart_push_to_b(a,b);
+            if(stack_len(*b) >= 2)
+                if ((*b)->next && (*b)->value < (*b)->next->value)
+                    swap_b(b);
+            ft_push_to_b(a, b);
+            i++;
+            // smart_push_to_b(a,b);
         }
+        if(is_reverse(a))
+            r_rotate_a(a);
         else
             rotate_a(a);
-        i++;
+        // else
+        //     rotate_a(a);
+            // check_revers(a);
+        // i++;
+        // i++;
         // remaining--;
     }
     // printf("------ BACK TO A ------\n");
