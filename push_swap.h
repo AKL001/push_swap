@@ -31,6 +31,11 @@ typedef struct s_max {
     int poss;      // Number of moves needed
 } t_max_cost;
 
+typedef struct s_min {
+    int value;
+    int moves;      // Position in stack
+    int poss;      // Number of moves needed
+} t_min_cost;
 
 /* STACK INIT */
 void    stack_init(t_stack **a,char **argv);
@@ -74,7 +79,11 @@ void swap_a_b(t_stack **a,t_stack **b);
 /* sorted array */
 int    *sort_list(t_stack *a);
 t_max_cost find_max(t_stack *stack,int size);
+void tiny_sort(t_stack **a);
+void holy_sort(t_stack **a,t_stack **b);
 
+/* PUSH BACK TO A */
+void push_back_to_a(t_stack **b,t_stack **a);
 /* additionals or tools */
 void sort_stack(t_stack **a, t_stack **b);
 int MIN(int a, int b);
