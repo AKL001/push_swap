@@ -12,7 +12,7 @@ int main(int argc, char *argv[])
     {
         if (stack_len(a) == 3)
             tiny_sort(&a);
-        if (stack_len(a) == 5)
+        if (stack_len(a) == 5 || stack_len(a) == 4)
             holy_sort(&a,&b);   
         else
             sort_stack(&a, &b);

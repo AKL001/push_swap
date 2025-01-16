@@ -2,3 +2,4 @@
 a.out
 *.out
 /myenv
+/push_swap_visualizer/

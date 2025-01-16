@@ -1,18 +1,5 @@
 #include "push_swap.h"
 
-
-// void free_cur_stack(t_stack **a)
-// {
-//     t_stack *temp;
-
-//     while (*a)
-//     {
-//         temp = *a;
-//         *a = (*a)->next;  // Move to the next node
-//         free(temp);  // Free the current node
-//     }
-// }
-
 void free_stack(t_stack **stack)
 {
 	t_stack	*tmp;

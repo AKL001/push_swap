@@ -1,15 +1,6 @@
 #include "../push_swap.h"
 #include <limits.h>
-/* determinating what and who should go first or be executed 
-    1- {arraylen}/2 
-    // comparint the possition of the number with half of the array
-    // 
-    2- number possition if >= (arraylen)/2 
-    // meaning if the  possition of 10-> 2 and 2 >= 50 meaning not gonna execute it
-    3- check  if the number  is bigger or smaller than the numbers in stack b;
-    
 
-*/
 t_stack *find_highest(t_stack *a)
 {
     t_stack *max;
@@ -36,6 +27,7 @@ void tiny_sort(t_stack **a)
         r_rotate_a(a);
     if ((*a)->value > (*a)->next->value)
         swap_a(a);
+    return;
 }
 
 t_min_cost find_min(t_stack *stack,int size)
@@ -80,11 +72,12 @@ void holy_sort(t_stack **a,t_stack **b)
             ft_push_to_b(a,b);
             len--;
         }
-        if((*a)->value != min.value && (min.poss <= len / 2))
+        min = find_min(*a,len);
+        if((*a)->value != min.value && (min.poss <= len / 2) && len > 3)
             rotate_a(a);
-        if((*a)->value != min.value && (min.poss > len / 2))
+        if((*a)->value != min.value && (min.poss > len / 2) && len > 3)
             r_rotate_a(a);
-    }   
+    }
     if (len == 3)
         tiny_sort(a);
     push_back_to_a(b,a);
