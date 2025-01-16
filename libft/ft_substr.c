@@ -13,8 +13,7 @@
 #include "../push_swap.h"
 #include <stddef.h>
 
-
-static  size_t	ft_strlen(const char *s)
+static size_t	ft_strlen(const char *s)
 {
 	size_t	i;
 
@@ -62,7 +61,7 @@ char	*ft_substr(char const *s, unsigned int start, size_t len)
 	ptr[len] = '\0';
 	if (error_syntax(ptr))
 	{
-		free(ptr);	
+		free(ptr);
 		return (NULL);
 	}
 	else
