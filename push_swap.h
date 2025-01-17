@@ -98,5 +98,7 @@ int						is_sorted(t_stack *stack);
 int						stack_len(t_stack *stack);
 int						append_node(t_stack **stack, int nbr);
 t_stack					*find_last_node(t_stack *head);
+/* CHECKER  BONUS */
+int	ft_strncmp(const char *s1, const char *s2, size_t n);
 
 #endif
