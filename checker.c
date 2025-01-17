@@ -52,10 +52,11 @@ int   get_next_line(t_stack **a,t_stack **b)
     action = ft_read_until_newline(0);
     if (!action)
         return (0);
+	// printf("%s",action);
     if (!ft_strncmp(action,"ra\n",3))
         return (checker_rotate_a(a),free(action),1);
     else if (!ft_strncmp(action,"rb\n",3))
-		return(checker_rotate_a(a),free(action),1); 
+		return(checker_rotate_b(b),free(action),1); 
     else if (!ft_strncmp(action,"rr\n",3))
 		return (checker_rotate_a_b(a,b),free(action),1);
 	else if (!ft_strncmp(action,"sa\n",3))
@@ -71,7 +72,7 @@ int   get_next_line(t_stack **a,t_stack **b)
 	else if (!ft_strncmp(action,"rra\n",4))
 		return (checker_r_rotate_a(a),free(action),1);
 	else if (!ft_strncmp(action,"rrb\n",4))
-		return (checker_r_rotate_b(a),free(action),1);
+		return (checker_r_rotate_b(b),free(action),1);
 	else if (!ft_strncmp(action,"rrr\n",4))
 		return (checker_rr_rotate(a,b),free(action),1);	
 	else 
@@ -92,26 +93,29 @@ int main(int argc,char *argv[])
     t_stack *b = NULL;
 	/* TODO 
 	 	1) fix sa ss when 2 numbers in checker 
-
+		
 	*/
-	// printf("%s\n",argv[1]);
-	// if (argc < 2)
-	// 	return (1);
+	if (argc < 2)
+		return (1);
+	int i = 1;
+	// while(argv[i])
+	// {
+	// 	printf("%s\n",argv[i]);
+	// 	i++;
+	// }
     stack_init(&a,argv + 1);
-	// // checker_rotate_a(&a);
-	while(a)
+	while(get_next_line(&a,&b));
+	t_stack *tmp = a;
+	while(tmp)
 	{
-		printf("%d\n",a->value);
-		a = a->next;
+		printf("%d\n",tmp->value);
+		tmp = tmp->next;
 	}
-	// 	// write(1, "",1);
-	// while(get_next_line(&a,&b));
-	// // 	// write(1, "",1);
-	// if(is_sorted(a) && !b)
-	// 	write(1,"OK\n",3);
-	// else
-	// 	write(1,"KO\n",3);
-	// free_stack(&a);
-    // free_stack(&b);
-	// exit(0);
+	if(is_sorted(a) && !b)
+		write(1,"OK\n",3);
+	else
+		write(1,"KO\n",3);
+	free_stack(&a);
+    free_stack(&b);
+	exit(0);
 }

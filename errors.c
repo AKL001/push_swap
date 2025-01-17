@@ -31,6 +31,8 @@ void	free_stack(t_stack **stack)
 
 int	error_syntax(char *str_nbr)
 {
+	if (!str_nbr)
+		return 1;
 	if (!(*str_nbr == '+' || *str_nbr == '-' || (*str_nbr >= '0'
 				&& *str_nbr <= '9')))
 		return (1);
@@ -61,7 +63,7 @@ int	error_repetition(t_stack *a, int nbr)
 void	ft_error(t_stack **stack, char **av)
 {
 	free_stack(stack);
-	if (av)
+	if (av != NULL)
 		free_av(av);
 	write(2, "Error\n", 6);
 	exit(1);

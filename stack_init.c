@@ -50,12 +50,7 @@ void	stack_init(t_stack **a, char **argv)
 	i = 0;
 	while (argv[i])
 	{
-		if (error_syntax(av[j]))
-		{
-			printf("error_syntax\n");	
-			// exit(1);
-		}
-		av = ft_split(argv[i], ' ');
+		av = ft_split(argv[i],' ');
 		if (!av)
 			ft_error(a, NULL);
 		j = 0;

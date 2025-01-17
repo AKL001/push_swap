@@ -22,10 +22,10 @@ bonus :$(BONUS)
 	@make clean
 
 $(NAME): $(OBJS)
-	@ cc -Wall -Wextra -Werror $(OBJS) -o $(NAME) -fsanitize=address 
+	@ cc -Wall -Wextra -Werror $(OBJS) -o $(NAME)
 # -fsanitize=address
 $(BONUS) : $(BNS_OBJS)
-	@ cc -Wall -Wextra -Werror $(BNS_OBJS) -o $(BONUS) 
+	@ cc -Wall -Wextra -Werror $(BNS_OBJS) -o $(BONUS)
 	
 clean: 
 	@rm -f $(OBJS) $(BNS_OBJS)
