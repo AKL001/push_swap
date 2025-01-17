@@ -50,6 +50,11 @@ void	stack_init(t_stack **a, char **argv)
 	i = 0;
 	while (argv[i])
 	{
+		if (error_syntax(av[j]))
+		{
+			printf("error_syntax\n");	
+			// exit(1);
+		}
 		av = ft_split(argv[i], ' ');
 		if (!av)
 			ft_error(a, NULL);
@@ -57,7 +62,7 @@ void	stack_init(t_stack **a, char **argv)
 		while (av[j])
 		{
 			nbr = ft_atol(av[j]);
-			if (error_syntax(av[j]) || nbr > INT_MAX || nbr < INT_MIN
+			if (nbr > INT_MAX || nbr < INT_MIN
 				|| error_repetition(*a, (int)nbr))
 				ft_error(a, av);
 			if (append_node(a, (int)nbr))

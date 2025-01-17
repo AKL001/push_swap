@@ -7,8 +7,8 @@ SRCS = push_swap.c stack_init.c errors.c utils/stack_utils.c libft/ft_split.c li
 		tools/tiny_sorts.c
 
 BNS_SRCS = checker.c stack_init.c libft/ft_strncmp.c libft/ft_split.c errors.c libft/ft_substr.c  \
-			utils/stack_utils.c  utils/rotate.c utils/swap.c \
-			utils/push.c utils/re_rotate.c 
+			checker_utils/checker_push.c checker_utils/checker_re_rotate.c \
+			checker_utils/checker_rotate.c checker_utils/checker_swap.c utils/stack_utils.c 
 
 DEPS = push_swap.h
 
@@ -25,7 +25,7 @@ $(NAME): $(OBJS)
 	@ cc -Wall -Wextra -Werror $(OBJS) -o $(NAME) -fsanitize=address 
 # -fsanitize=address
 $(BONUS) : $(BNS_OBJS)
-	@ cc -Wall -Wextra -Werror $(BNS_OBJS) -o $(BONUS) -fsanitize=address 
+	@ cc -Wall -Wextra -Werror $(BNS_OBJS) -o $(BONUS) 
 	
 clean: 
 	@rm -f $(OBJS) $(BNS_OBJS)

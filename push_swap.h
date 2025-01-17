@@ -100,5 +100,17 @@ int						append_node(t_stack **stack, int nbr);
 t_stack					*find_last_node(t_stack *head);
 /* CHECKER  BONUS */
 int	ft_strncmp(const char *s1, const char *s2, size_t n);
+void	checker_swap_a(t_stack **a);
+void	checker_swap_b(t_stack **b);
+void	checker_swap_a_b(t_stack **a, t_stack **b);
+void	checker_rotate_a_b(t_stack **a, t_stack **b);
+void	checker_rotate_b(t_stack **b);
+void	checker_rotate_a(t_stack **a);
+void	checker_rr_rotate(t_stack **a, t_stack **b);
+void	checker_r_rotate_b(t_stack **b);
+void	checker_r_rotate_a(t_stack **a);
+void	checker_ft_push_to_a(t_stack **a, t_stack **b);
+void	checker_ft_push_to_b(t_stack **a, t_stack **b);
+
 
 #endif
