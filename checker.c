@@ -1,30 +1,31 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   push_swap.c                                        :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: ablabib <marvin@42.fr>                     +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/01/16 11:24:45 by ablabib           #+#    #+#             */
+/*   Updated: 2025/01/18 12:06:11 by ablabib          ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "push_swap.h"
 
-static void	error_clean(t_stack **a,t_stack **b,char *action)
+static int	check_is_sorted(t_stack *stack)
 {
-	if (action)
-		free(action);
-	free_stack(a);
-	free_stack(b);
-	write(2, "Error\n",6);
-	exit(1);
-}
+	t_stack	*current;
 
-static int check_is_sorted(t_stack *stack)
-{
-    t_stack *current;
-
-    if (!stack || !stack->next)
-        return 1;
-        
-    current = stack;
-    while (current->next)
-    {
-        if (current->value > current->next->value)
-            return 0;
-        current = current->next;
-    }
-    return 1;
+	if (!stack || !stack->next)
+		return (1);
+	current = stack;
+	while (current->next)
+	{
+		if (current->value > current->next->value)
+			return (0);
+		current = current->next;
+	}
+	return (1);
 }
 
 char	*ft_read_until_newline(int fd)
@@ -55,58 +56,66 @@ char	*ft_read_until_newline(int fd)
 	return (buffer);
 }
 
-int   get_next_line(t_stack **a,t_stack **b)
+int	get_action(t_stack **a, t_stack **b, char *action)
 {
-    char *action;
-
-    action = ft_read_until_newline(0);
-    if (!action)
-        return (0);
-    if (!ft_strncmp(action,"ra\n",3))
-        return (checker_rotate_a(a),free(action),1);
-    else if (!ft_strncmp(action,"rb\n",3))
-		return(checker_rotate_b(b),free(action),1); 
-    else if (!ft_strncmp(action,"rr\n",3))
-		return (checker_rotate_a_b(a,b),free(action),1);
-	else if (!ft_strncmp(action,"sa\n",3))
-		return (checker_swap_a(a),free(action),1);
-	else if (!ft_strncmp(action,"sb\n",3))
-		return (checker_swap_b(b),free(action),1);
-	else if (!ft_strncmp(action,"ss\n",3))
-		return (checker_swap_a_b(a,b),free(action),1);
-	else if (!ft_strncmp(action,"pa\n",3))
-		return (checker_ft_push_to_a(a,b),free(action),1);
-	else if (!ft_strncmp(action,"pb\n",3))
-		return (checker_ft_push_to_b(a,b),free(action),1);
-	else if (!ft_strncmp(action,"rra\n",4))
-		return (checker_r_rotate_a(a),free(action),1);
-	else if (!ft_strncmp(action,"rrb\n",4))
-		return (checker_r_rotate_b(b),free(action),1);
-	else if (!ft_strncmp(action,"rrr\n",4))
-		return (checker_rr_rotate(a,b),free(action),1);	
-	else 
-		error_clean(a,b,action);	
+	if (!ft_strncmp(action, "ra\n", 3))
+		return (checker_rotate_a(a), 1);
+	if (!ft_strncmp(action, "rb\n", 3))
+		return (checker_rotate_b(b), 1);
+	if (!ft_strncmp(action, "rr\n", 3))
+		return (checker_rotate_a_b(a, b), 1);
+	if (!ft_strncmp(action, "sa\n", 3))
+		return (checker_swap_a(a), 1);
+	if (!ft_strncmp(action, "sb\n", 3))
+		return (checker_swap_b(b), 1);
+	if (!ft_strncmp(action, "ss\n", 3))
+		return (checker_swap_a_b(a, b), 1);
+	if (!ft_strncmp(action, "pa\n", 3))
+		return (checker_ft_push_to_a(a, b), 1);
+	if (!ft_strncmp(action, "pb\n", 3))
+		return (checker_ft_push_to_b(a, b), 1);
+	if (!ft_strncmp(action, "rra\n", 4))
+		return (checker_r_rotate_a(a), 1);
+	if (!ft_strncmp(action, "rrb\n", 4))
+		return (checker_r_rotate_b(b), 1);
+	if (!ft_strncmp(action, "rrr\n", 4))
+		return (checker_rr_rotate(a, b), 1);
+	return (0);
 }
 
-
-int main(int argc,char *argv[])
+int	get_next_line(t_stack **a, t_stack **b)
 {
-    t_stack *a = NULL;
-    t_stack *b = NULL;
-	/* TODO 
-	 	1) fix sa ss when 2 numbers in checker 
-		2) the ./checker "       1" is fixed;
-		3) 
-	*/
+	char	*action;
+	int		result;
+
+	action = ft_read_until_newline(0);
+	if (!action)
+		return (0);
+	result = get_action(a, b, action);
+	if (result)
+		free(action);
+	else
+		error_clean(a, b, action);
+	return (result);
+}
+
+int	main(int argc, char *argv[])
+{
+	t_stack	*a;
+	t_stack	*b;
+
+	a = NULL;
+	b = NULL;
 	if (argc < 2)
 		return (1);
-    stack_init(&a,argv + 1);
-	while(get_next_line(&a,&b));
-	if(check_is_sorted(a) && !b)
-		write(1,"OK\n",3);
+	stack_init(&a, argv + 1);
+	while (get_next_line(&a, &b))
+		;
+	if (check_is_sorted(a) && !b)
+		write(1, "OK\n", 3);
 	else
-		write(1,"KO\n",3);
+		write(1, "KO\n", 3);
 	free_stack(&a);
-    free_stack(&b);
+	free_stack(&b);
 	exit(0);
 }

@@ -8,7 +8,8 @@ SRCS = push_swap.c stack_init.c errors.c utils/stack_utils.c libft/ft_split.c li
 
 BNS_SRCS = checker.c stack_init.c libft/ft_strncmp.c libft/ft_split.c errors.c libft/ft_substr.c  \
 			checker_utils/checker_push.c checker_utils/checker_re_rotate.c \
-			checker_utils/checker_rotate.c checker_utils/checker_swap.c utils/stack_utils.c 
+			checker_utils/checker_rotate.c checker_utils/checker_swap.c utils/stack_utils.c \
+			checker_utils/checker_errors.c
 
 DEPS = push_swap.h
 

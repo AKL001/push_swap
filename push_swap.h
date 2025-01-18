@@ -111,5 +111,6 @@ void					checker_r_rotate_b(t_stack **b);
 void					checker_r_rotate_a(t_stack **a);
 void					checker_ft_push_to_a(t_stack **a, t_stack **b);
 void					checker_ft_push_to_b(t_stack **a, t_stack **b);
+void					error_clean(t_stack **a, t_stack **b, char *action);
 
 #endif
