@@ -80,7 +80,7 @@ char	**ft_split(char const *s, char c)
 {
 	size_t	words;
 	char	**ptr;
-	int 	i;
+	int		i;
 
 	if (!s)
 		return (NULL);

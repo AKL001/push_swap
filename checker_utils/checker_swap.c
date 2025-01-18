@@ -12,23 +12,6 @@
 
 #include "../push_swap.h"
 
-// void	checker_swap_a(t_stack **a)
-// {
-// 	int	len;
-
-// 	len = stack_len(*a);
-// 	if (!*a || !a || len == 1)
-// 		return ;
-// 	*a = (*a)->next;
-// 	(*a)->prev->prev = (*a);
-// 	if ((*a)->next)
-// 	{
-// 		(*a)->prev->next = (*a)->next;
-// 		(*a)->next->prev = (*a)->prev;
-// 	}
-// 	(*a)->next = (*a)->prev;
-// 	(*a)->prev = NULL;
-// }
 void	checker_swap_a(t_stack **a)
 {
 	int		len;

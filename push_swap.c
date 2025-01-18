@@ -6,7 +6,7 @@
 /*   By: ablabib <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/16 11:24:45 by ablabib           #+#    #+#             */
-/*   Updated: 2025/01/16 11:25:19 by ablabib          ###   ########.fr       */
+/*   Updated: 2025/01/18 12:06:11 by ablabib          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,8 +24,6 @@ int	main(int argc, char *argv[])
 	stack_init(&a, argv + 1);
 	if (!is_sorted(a))
 	{
-		// if (stack_len == 1)
-		// printf("stack len is => %d\n",stack_len(a));
 		if (stack_len(a) <= 3)
 			tiny_sort(&a);
 		else if (stack_len(a) == 5 || stack_len(a) == 4)

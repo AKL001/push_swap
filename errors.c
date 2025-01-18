@@ -6,7 +6,7 @@
 /*   By: ablabib <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/16 11:35:48 by ablabib           #+#    #+#             */
-/*   Updated: 2025/01/16 11:36:33 by ablabib          ###   ########.fr       */
+/*   Updated: 2025/01/18 12:04:40 by ablabib          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@ void	free_stack(t_stack **stack)
 int	error_syntax(char *str_nbr)
 {
 	if (!str_nbr)
-		return 1;
+		return (1);
 	if (!(*str_nbr == '+' || *str_nbr == '-' || (*str_nbr >= '0'
 				&& *str_nbr <= '9')))
 		return (1);

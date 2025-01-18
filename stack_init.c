@@ -50,15 +50,15 @@ void	stack_init(t_stack **a, char **argv)
 	i = 0;
 	while (argv[i])
 	{
-		av = ft_split(argv[i],' ');
+		av = ft_split(argv[i], ' ');
 		if (!av)
 			ft_error(a, NULL);
 		j = 0;
 		while (av[j])
 		{
 			nbr = ft_atol(av[j]);
-			if (nbr > INT_MAX || nbr < INT_MIN
-				|| error_repetition(*a, (int)nbr))
+			if (nbr > INT_MAX || nbr < INT_MIN || error_repetition(*a,
+					(int)nbr))
 				ft_error(a, av);
 			if (append_node(a, (int)nbr))
 				ft_error(a, av);

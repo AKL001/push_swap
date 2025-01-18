@@ -1,5 +1,6 @@
-./vscode/
+/.vscode/
 a.out
 *.out
 /myenv
 /push_swap_visualizer/
+checker_linux
