@@ -57,7 +57,7 @@ void	push_back_to_a(t_stack **b, t_stack **a)
 	}
 }
 
-int	is_reverse(t_stack **a)
+void	is_reverse(t_stack **a)
 {
 	t_stack	*tmp;
 	int		len;

@@ -14,7 +14,6 @@
 
 void	checker_swap_a(t_stack **a)
 {
-	int		len;
 	t_stack	*first;
 	t_stack	*second;
 	t_stack	*third;
@@ -35,7 +34,6 @@ void	checker_swap_a(t_stack **a)
 
 void	checker_swap_b(t_stack **b)
 {
-	int		len;
 	t_stack	*first;
 	t_stack	*second;
 	t_stack	*third;

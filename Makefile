@@ -17,16 +17,17 @@ OBJS = $(SRCS:.c=.o)
 BNS_OBJS = $(BNS_SRCS:.c=.o)
 
 all : $(NAME)
-	@make clean
 
 bonus :$(BONUS)
-	@make clean
 
 $(NAME): $(OBJS)
-	@ cc -Wall -Wextra -Werror $(OBJS) -o $(NAME)
-# -fsanitize=address
+	cc -Wall -Wextra -Werror $(OBJS) -o $(NAME)
+
 $(BONUS) : $(BNS_OBJS)
-	@ cc -Wall -Wextra -Werror $(BNS_OBJS) -o $(BONUS)
+	cc -Wall -Wextra -Werror $(BNS_OBJS) -o $(BONUS)
+
+%.o:%.c
+	cc -Wall -Wextra -Werror  -c $< -o $@
 	
 clean: 
 	@rm -f $(OBJS) $(BNS_OBJS)

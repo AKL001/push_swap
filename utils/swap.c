@@ -33,7 +33,6 @@ void	swap_a(t_stack **a)
 
 void	swap_b(t_stack **b)
 {
-	int		len;
 	t_stack	*first;
 	t_stack	*second;
 	t_stack	*third;
