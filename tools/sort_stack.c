@@ -24,7 +24,7 @@ int	chunk_range(int size)
 	if (size <= 16)
 		range = 3;
 	else if (size <= 100)
-		range = 3;
+		range = 13;
 	else if (size <= 500)
 		range = 30;
 	else
