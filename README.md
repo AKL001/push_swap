@@ -5,7 +5,7 @@ A sorting algorithm implementation using specific push and swap operations with 
 ## Project Overview 🎯
 
 This project implements a sorting algorithm using a restricted set of operations (push, swap, rotate) on two stacks. The main challenge? Getting creative with these limited moves to sort numbers efficiently! 
-
+> 🧪 **Looking to test your implementation?** Check out [TESTING.md](TESTING.md) for a comprehensive test suite and benchmarks!
 ## Technical Implementation 🛠️
 
 ### Data Structure 📚
