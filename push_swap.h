@@ -31,13 +31,6 @@ typedef struct s_chunk
 	int					end;
 }						t_chunk;
 
-typedef struct s_cost
-{
-	int					index;
-	int					moves;
-	int					is_ra;
-}						t_cost;
-
 typedef struct s_max
 {
 	int					value;
